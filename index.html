@@ -1,0 +1,67 @@
+<!-- <p contenteditable="true">
+    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione veritatis perspiciatis quaerat maxime dolore, est rem, officiis doloribus, vitae minus atque exercitationem quam nisi natus nobis? A adipisci deserunt labore?
+</p> -->
+
+<script>console.log(localStorage.getItem("token"))</script>
+
+<!-- <div>
+    <audio controls>
+        <source src="24k.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+    </audio>
+</div>
+
+<div>
+  <audio controls>
+      <source src="https://upload.wikimedia.org/wikipedia/commons/b/bb/Dominican_Republic_National_Anthem.ogg" type="audio/ogg">
+  Your browser does not support the audio element.
+  </audio>
+</div> -->
+
+<!-- 
+<div>
+    <video width="320" height="240" controls>
+        <source src="movie.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+      </video>
+</div> -->
+
+
+<button id = "find-me">Show my location</button><br/>
+<p id = "status"></p>
+<a id = "map-link" target="_blank"></a>
+
+<script>
+function geoFindMe() {
+
+const status = document.querySelector('#status');
+const mapLink = document.querySelector('#map-link');
+
+mapLink.href = '';
+mapLink.textContent = '';
+
+function success(position) {
+  const latitude  = position.coords.latitude;
+  const longitude = position.coords.longitude;
+
+  status.textContent = '';
+  mapLink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
+  mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
+}
+
+function error() {
+  status.textContent = 'Unable to retrieve your location';
+}
+
+if(!navigator.geolocation) {
+  status.textContent = 'Geolocation is not supported by your browser';
+} else {
+  status.textContent = 'Locating…';
+  navigator.geolocation.getCurrentPosition(success, error);
+}
+
+}
+
+document.querySelector('#find-me').addEventListener('click', geoFindMe);
+
+</script>
